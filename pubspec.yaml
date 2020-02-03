@@ -1,0 +1,7 @@
+name: eslp
+description: Reto Español a Largo Plazo 
+version: 0.0.1
+author: Makoki
+
+dependencies:
+  test: ^1.6.0
