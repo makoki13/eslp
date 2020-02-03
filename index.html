@@ -1,0 +1,106 @@
+<!-- AIzaSyBJSSJzOjJoQzEzLJVb41OkMnfAwR-u348 -->
+<!-- AIzaSyAhMLPSwqcR2zzTCHPPnNbeM5QJRoweY68 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 400px;
+            width: 600px;
+        }
+
+        #referencias {
+            height: 400px;
+            width: 600px;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="referencias"><textarea id="valores" style="width:100%;height:100%;"></textarea></div>
+    <script>
+        var map; var geocoder; var infowindow;
+        var texto = '';
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: { lat: 38.950917, lng: -0.142039 }
+            });
+            geocoder = new google.maps.Geocoder();
+            infowindow = new google.maps.InfoWindow;
+        }
+
+        function geocodeLatLng(geocoder, map, infowindow) {
+            var input = "38.950917,-0.142039";
+            var latlngStr = input.split(',', 2);
+            var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
+            geocoder.geocode({ 'location': latlng }, function (results, status) {
+                console.log(results[0].address_components[6].long_name);
+                if (status === 'OK') {
+                    if (results[0]) {
+                        /* map.setZoom(11);
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        infowindow.setContent(results[0].formatted_address);
+                        infowindow.open(map, marker); */
+                        var cp = results[0].address_components[6].long_name
+                        texto = '"'+input+'" : "'+cp+'"';
+                        //alert("T1:"+texto);
+                        document.getElementById('valores').value = document.getElementById('valores').value + "\n" + texto
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+            //alert("T2:"+texto);
+        }
+
+        function testGeocoder() {
+            console.log(geocoder, map, infowindow);
+            geocodeLatLng(geocoder, map, infowindow);
+        }
+
+        function saveTextAsFile() {
+            var textToSave = document.getElementById("inputTextToSave").value;
+            var textToSaveAsBlob = new Blob([textToSave], { type: "text/plain" });
+            var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+            var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            downloadLink.href = textToSaveAsURL;
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+
+            downloadLink.click();
+        }
+    </script>
+    <button onclick="testGeocoder();">TEST</button>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhMLPSwqcR2zzTCHPPnNbeM5QJRoweY68&callback=initMap"
+        async defer></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyBJSSJzOjJoQzEzLJVb41OkMnfAwR-u348&callback=initMap" async defer></script>-->
+</body>
+
+</html>
