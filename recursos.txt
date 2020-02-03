@@ -1,0 +1,3 @@
+https://alarcos.esi.uclm.es/per/fruiz/pobesp/ter_mun.htm
+https://alarcos.esi.uclm.es/per/fruiz/pobesp/ter_jud.htm
+http://www.cartociudad.es/geocoder/api/geocoder/reverseGeocode?lon=-0.141949&lat=38.950952&type=codpostal
