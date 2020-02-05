@@ -6,22 +6,27 @@ import './salidas.dart';
 
 void main(List<String> arguments) {
   var hayCambios = false;
-  
+  Usuario usuario;
+  Salidas salida;
+    
   eslp_console.sendLog( ':', '[INICIO]' );
+
+  usuario = Usuario('pablo.makoki@gmail.com');
+  salida = Salidas();
   
   // Loguearse
-  var usuario = getUsuario();
+  var idUsuario = usuario.getUsuario();
 
   // Obtener salidas
   List<String> listaSalidas;
-  listaSalidas = getListaDeSalidas(usuario);
+  listaSalidas = RideWithGPS.getListaDeSalidas(usuario);
   
   // Para cada salida  
   if (listaSalidas.isNotEmpty) {
-    abreBaseDeDatos().then( ( db) {
-      recorreVector(db, usuario, listaSalidas).then((valor) {
+    salida.abreBaseDeDatos().then( ( db) {
+      salida.recorreVector(db, idUsuario, listaSalidas).then((valor) {
         hayCambios = hayCambios || valor;
-        getPuntuacion(hayCambios);
+        usuario.getPuntuacion(hayCambios);
         eslp_console.sendLog( ':', '[FIN]' );
       });
     });    

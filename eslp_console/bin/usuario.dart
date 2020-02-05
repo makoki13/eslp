@@ -1,25 +1,33 @@
 import 'package:eslp_console/eslp_console.dart' as eslp_console;
 
-String getUsuario() {
-  return 'pablo.makoki@gmail.com';
-}
+class Usuario {
+  String usuario;
 
-int recalculaPuntuacion() {
-  return 100;
-}
+  Usuario (String identificador) {
+    usuario = identificador;
+  }
 
-int getPuntuacionActual() {
-  return 50;
-}
+  String getUsuario() {
+    return usuario;
+  }
 
-void getPuntuacion(bool hayCambios) {
+  int recalculaPuntuacion() {
+    return 100;
+  }
+
+  int getPuntuacionActual() {
+    return 50;
+  }
+
+  void getPuntuacion(bool hayCambios) {
     var puntuacion = 0;
-  
+
     if (hayCambios == true) {
       puntuacion = recalculaPuntuacion();
     } else {
       puntuacion = getPuntuacionActual();
     }
-    
-    eslp_console.sendLog( puntuacion, '[#puntuacion]' );
+
+    eslp_console.sendLog(puntuacion, '[#puntuacion]');
+  }
 }
