@@ -30,4 +30,8 @@ class Usuario {
 
     eslp_console.sendLog(puntuacion, '[#puntuacion]');
   }
+
+  bool procesaLocalidad(String idLocalidad) {
+    return true;
+  }
 }
