@@ -27,10 +27,9 @@ class Salidas {
     eslp_console.sendLog(clave, '[#2c1]');
 
     var title = await store.record(clave).get(db) as String;
-    eslp_console.sendLog(title, '[#2c2]');
+    eslp_console.sendLog((title != null), '[#2c2]');
 
-    //return title != null; CLAUDIA
-    return false;
+    return title != null;
   }
 
 /* Devuelve true si ha habido algún cambio en la lista de hitos */
@@ -40,12 +39,12 @@ class Salidas {
     var clave = usuario + '###' + salida;
     var listaPuntos = <Coordenadas>[];
     
-    //await store.record(clave).put(db, 'XXXXX'); CLAUDIA
-    //eslp_console.sendLog(clave, '[#2d]'); CLAUDIA
+    await store.record(clave).put(db, 'XXXXX');
+    eslp_console.sendLog(clave, '[#2d]');
 
     listaPuntos =  RideWithGPS.getPuntosDeSalida(salida);
     await Future.forEach(listaPuntos, (elemento) async {
-      var texto = await getPoblacion(elemento.getLatitud(), elemento.getLongitud());
+      var texto = await WS.getPoblacion(elemento.getLatitud(), elemento.getLongitud());
       dynamic reg = jsonDecode(texto);
       var id = reg['id'].toString().substring(0,5);
       eslp_console.sendLog(id, '[#id]');
