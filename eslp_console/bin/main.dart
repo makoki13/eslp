@@ -11,12 +11,11 @@ void main(List<String> arguments) {
     
   eslp_console.sendLog( ':', '[INICIO]' );
 
-  usuario = Usuario('pablo.makoki@gmail.com');
-  salida = Salidas();
-  
   // Loguearse
-  var idUsuario = usuario.getUsuario();
+  usuario = Usuario('pablo.makoki@gmail.com');
 
+  salida = Salidas();
+    
   // Obtener salidas
   List<String> listaSalidas;
   listaSalidas = RideWithGPS.getListaDeSalidas(usuario);
@@ -24,7 +23,7 @@ void main(List<String> arguments) {
   // Para cada salida  
   if (listaSalidas.isNotEmpty) {
     salida.abreBaseDeDatos().then( ( db) {
-      salida.recorreVector(db, idUsuario, listaSalidas).then((valor) {
+      salida.recorreVector(db, usuario, listaSalidas).then((valor) {
         hayCambios = hayCambios || valor;
         usuario.getPuntuacion(hayCambios);
         eslp_console.sendLog( ':', '[FIN]' );

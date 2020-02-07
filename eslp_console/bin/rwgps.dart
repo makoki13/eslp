@@ -37,8 +37,9 @@ class RideWithGPS {
     lista.add(coordenada);
     coordenada = Coordenadas('-0.155366','38.968665'); //Daimuz
     lista.add(coordenada);
-    coordenada = Coordenadas('-0.163133','38.987948'); //Gandia (Grao)
-    
+    coordenada = Coordenadas('-0.163133','38.987948'); //Gandia (Grao)        
+    lista.add(coordenada);
+    coordenada = Coordenadas('-0.301455','39.014899'); //Barx
     lista.add(coordenada);
 
     return lista;

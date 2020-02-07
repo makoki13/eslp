@@ -4,6 +4,7 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
 import './rwgps.dart';
+import 'usuario.dart';
 import 'web_server.dart';
 
 import 'package:eslp_console/eslp_console.dart' as eslp_console;
@@ -20,23 +21,26 @@ class Salidas {
   }
 
   Future<bool> estaRegistrada(
-      DatabaseClient db, String usuario, String salida) async {
+      DatabaseClient db, Usuario usuario, String salida) async {
     var store = StoreRef.main();
 
-    var clave = usuario + '###' + salida;
+    var idUsuario = usuario.getUsuario();
+    var clave = idUsuario + '###' + salida;
     eslp_console.sendLog(clave, '[#2c1]');
 
     var title = await store.record(clave).get(db) as String;
     eslp_console.sendLog((title != null), '[#2c2]');
 
-    return title != null;
+    return title != null;    
   }
 
 /* Devuelve true si ha habido algún cambio en la lista de hitos */
-  Future<bool> procesa(var db, String usuario, String salida) async {
+  Future<bool> procesa(var db, Usuario usuario, String salida) async {
     //Guarda en la tabla de salidas por usuario
+    var idUsuario = usuario.getUsuario();
+
     var store = StoreRef.main();
-    var clave = usuario + '###' + salida;
+    var clave = idUsuario + '###' + salida;
     var listaPuntos = <Coordenadas>[];
     
     await store.record(clave).put(db, 'XXXXX');
@@ -47,6 +51,9 @@ class Salidas {
       var texto = await WS.getPoblacion(elemento.getLatitud(), elemento.getLongitud());
       dynamic reg = jsonDecode(texto);
       var id = reg['id'].toString().substring(0,5);
+      
+      await usuario.procesaLocalidad(id);
+
       eslp_console.sendLog(id, '[#id]');
     });
 
@@ -64,7 +71,7 @@ class Salidas {
     return hayCambios;
   }
 
-  Future<bool> recorreVector(db, usuario, Iterable<String> listaSalidas) async {
+  Future<bool> recorreVector(db, Usuario usuario, Iterable<String> listaSalidas) async {
     var hayCambios = false;
     var hayNuevoCambio = false;
 

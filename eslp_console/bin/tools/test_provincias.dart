@@ -2,7 +2,7 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
 Future<Object> abreBaseDeDatos() async {
-  var baseDeDatos = 'ca.db';
+  var baseDeDatos = 'usuarios.db';
   var dbFactory = databaseFactoryIo;
 
   // open the database. We use the database factory to open the database
