@@ -1,0 +1,20 @@
+{"version":1,"sembast":1}
+{"key":1,"value":{"id":"01","nombre":"ANDALUCÍA","items":785}}
+{"key":2,"value":{"id":"02","nombre":"ARAGÓN","items":731}}
+{"key":3,"value":{"id":"03","nombre":"ASTURIAS","items":77}}
+{"key":4,"value":{"id":"04","nombre":"BALEARS","items":67}}
+{"key":5,"value":{"id":"05","nombre":"CANARIAS","items":87}}
+{"key":6,"value":{"id":"06","nombre":"CANTABRIA","items":101}}
+{"key":7,"value":{"id":"07","nombre":"CASTILLA Y LEÓN","items":2240}}
+{"key":8,"value":{"id":"08","nombre":"CASTILLA LA MANCHA","items":919}}
+{"key":9,"value":{"id":"09","nombre":"CATALUÑA","items":945}}
+{"key":10,"value":{"id":"10","nombre":"COMUNITAT VALENCIANA","items":541}}
+{"key":11,"value":{"id":"11","nombre":"EXTREMADURA","items":388}}
+{"key":12,"value":{"id":"12","nombre":"GALICIA","items":313}}
+{"key":13,"value":{"id":"13","nombre":"MADRID","items":178}}
+{"key":14,"value":{"id":"14","nombre":"MURCIA","items":45}}
+{"key":15,"value":{"id":"15","nombre":"NAVARRA","items":270}}
+{"key":16,"value":{"id":"16","nombre":"PAÍS VASCO","items":251}}
+{"key":17,"value":{"id":"17","nombre":"LA RIOJA","items":174}}
+{"key":18,"value":{"id":"18","nombre":"CEUTA","items":1}}
+{"key":19,"value":{"id":"19","nombre":"MELILLA","items":1}}

@@ -2,7 +2,7 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
 Future<Object> abreBaseDeDatos() async {
-  var baseDeDatos = 'provincias.db';
+  var baseDeDatos = 'ca.db';
   var dbFactory = databaseFactoryIo;
 
   // open the database. We use the database factory to open the database
@@ -16,7 +16,10 @@ void main() async {
   print('Inicio....');
   
   abreBaseDeDatos().then( ( db ) async {      
-    var registro = await store.find(db);                      
-    print('${registro}');
+    var registro = await store.find(db);         
+    registro.forEach( (dato) {
+        print('${dato}');
+    });            
+    
   });          
 }
