@@ -1,0 +1,53 @@
+{"version":1,"sembast":1}
+{"key":"01","value":{"id":"01","nombre":"ALAVA","items":51}}
+{"key":"02","value":{"id":"02","nombre":"ALBACETE","items":87}}
+{"key":"03","value":{"id":"03","nombre":"ALICANTE","items":141}}
+{"key":"04","value":{"id":"04","nombre":"ALMERIA","items":103}}
+{"key":"05","value":{"id":"05","nombre":"ÁVILA","items":248}}
+{"key":"06","value":{"id":"06","nombre":"BADAJOZ","items":165}}
+{"key":"07","value":{"id":"07","nombre":"BALEARES","items":67}}
+{"key":"08","value":{"id":"08","nombre":"BARCELONA","items":311}}
+{"key":"09","value":{"id":"09","nombre":"BURGOS","items":371}}
+{"key":"10","value":{"id":"10","nombre":"CÁCERES","items":223}}
+{"key":"11","value":{"id":"11","nombre":"CÁDIZ","items":45}}
+{"key":"12","value":{"id":"12","nombre":"CASTELLÓN","items":135}}
+{"key":"13","value":{"id":"13","nombre":"CIUDAD REAL","items":102}}
+{"key":"14","value":{"id":"14","nombre":"CÓRDOBA","items":77}}
+{"key":"15","value":{"id":"15","nombre":"A CORUÑA","items":93}}
+{"key":"16","value":{"id":"16","nombre":"CUENCA","items":238}}
+{"key":"17","value":{"id":"17","nombre":"GIRONA","items":220}}
+{"key":"18","value":{"id":"18","nombre":"GRANADA","items":174}}
+{"key":"19","value":{"id":"19","nombre":"GUADALAJARA","items":288}}
+{"key":"20","value":{"id":"20","nombre":"GUIPÚZCOA","items":88}}
+{"key":"21","value":{"id":"21","nombre":"HUELVA","items":80}}
+{"key":"22","value":{"id":"22","nombre":"HUESCA","items":202}}
+{"key":"23","value":{"id":"23","nombre":"JAÉN","items":97}}
+{"key":"24","value":{"id":"24","nombre":"LEÓN","items":210}}
+{"key":"25","value":{"id":"25","nombre":"LLEIDA","items":231}}
+{"key":"26","value":{"id":"26","nombre":"LA RIOJA","items":174}}
+{"key":"27","value":{"id":"27","nombre":"LUGO","items":67}}
+{"key":"28","value":{"id":"28","nombre":"MADRID","items":178}}
+{"key":"29","value":{"id":"29","nombre":"MÁLAGA","items":103}}
+{"key":"30","value":{"id":"30","nombre":"MURCIA","items":45}}
+{"key":"31","value":{"id":"31","nombre":"NAVARRA","items":270}}
+{"key":"32","value":{"id":"32","nombre":"OURENSE","items":92}}
+{"key":"33","value":{"id":"33","nombre":"ASTURIAS","items":77}}
+{"key":"34","value":{"id":"34","nombre":"PALENCIA","items":191}}
+{"key":"35","value":{"id":"35","nombre":"LAS PALMAS","items":33}}
+{"key":"36","value":{"id":"36","nombre":"PONTEVEDRA","items":61}}
+{"key":"37","value":{"id":"37","nombre":"SALAMANCA","items":361}}
+{"key":"38","value":{"id":"38","nombre":"SANTA CRUZ DE TENERIFE","items":54}}
+{"key":"39","value":{"id":"39","nombre":"CANTABRIA (SANTANDER)","items":101}}
+{"key":"40","value":{"id":"40","nombre":"SEGOVIA","items":209}}
+{"key":"41","value":{"id":"41","nombre":"SEVILLA","items":106}}
+{"key":"42","value":{"id":"42","nombre":"SORIA","items":182}}
+{"key":"43","value":{"id":"43","nombre":"TARRAGONA","items":183}}
+{"key":"44","value":{"id":"44","nombre":"TERUEL","items":236}}
+{"key":"45","value":{"id":"45","nombre":"TOLEDO","items":204}}
+{"key":"46","value":{"id":"46","nombre":"VALENCIA","items":265}}
+{"key":"47","value":{"id":"47","nombre":"VALLADOLID","items":222}}
+{"key":"48","value":{"id":"48","nombre":"VIZCAYA","items":112}}
+{"key":"49","value":{"id":"49","nombre":"ZAMORA","items":246}}
+{"key":"50","value":{"id":"50","nombre":"ZARAGOZA","items":293}}
+{"key":"51","value":{"id":"51","nombre":"CEUTA","items":1}}
+{"key":"52","value":{"id":"52","nombre":"MELILLA","items":1}}
