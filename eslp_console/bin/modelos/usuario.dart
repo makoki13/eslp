@@ -42,11 +42,11 @@ class Usuario {
     return _bd_LocalidadesUsuario.existeRegistro('localidad', idLocalidad);
   }
 
-  void actualizamosPuntuacion() async {
+  void actualizamosPuntuacion(int puntos) async {
     var registro = await _bd_Usuarios.getRegistro('nombre', _usuario);
     var datos = registro.getTupla();
 
-    var nuevaPuntuacion = datos['puntos'] + 1;
+    var nuevaPuntuacion = datos['puntos'] + puntos;
     await _bd_Usuarios.updateRegistro(
         registro.getClave(), 'puntos', nuevaPuntuacion);
   }
@@ -75,7 +75,7 @@ class Usuario {
       //insertamos en la tabla de localidad_usuario
        var tupla = {'usuario': '${_usuario}', 'localidad': '${idLocalidad}'};
       var key = await _bd_LocalidadesUsuario.addRegistro( tupla );
-      await actualizamosPuntuacion();
+      await actualizamosPuntuacion(1);
       var localidad = await obtenemosInfoLocalidad(idLocalidad);
       print('Localidad: {$key . $localidad}');
     }
