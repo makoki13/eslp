@@ -1,6 +1,4 @@
 {"version":1,"sembast":1}
-{"key":1,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":0,"completado":0}}{"key":1,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":1,"completado":0}}
-{"key":1,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":2,"completado":0}}
-{"key":1,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":3,"completado":0}}
-{"key":1,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":4,"completado":0}}
-{"key":1,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":5,"completado":0}}
+{"key":4,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":1,"completado":0}}
+{"key":4,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":2,"completado":0}}
+{"key":4,"value":{"id":"00","nombre":"pablo.makoki@gmail.com","puntos":3,"completado":0}}

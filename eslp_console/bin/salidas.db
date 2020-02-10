@@ -1,4 +1,10 @@
 {"version":1,"sembast":1}
-{"key":1,"value":{"salida":"Salida40"}}
-{"key":2,"value":{"salida":"Salida41"}}
-{"key":3,"value":{"salida":"Salida42"}}
+{"key":7,"value":{"salida":"Salida40"}}
+{"key":8,"value":{"salida":"Salida41"}}
+{"key":9,"value":{"salida":"Salida42"}}
+{"key":7,"deleted":true,"value":{"salida":"Salida40"}}
+{"key":8,"deleted":true,"value":{"salida":"Salida41"}}
+{"key":9,"deleted":true,"value":{"salida":"Salida42"}}
+{"key":10,"value":{"salida":"Salida40"}}
+{"key":11,"value":{"salida":"Salida41"}}
+{"key":12,"value":{"salida":"Salida42"}}

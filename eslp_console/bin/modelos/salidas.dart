@@ -32,7 +32,7 @@ class Salidas {
       dynamic reg = jsonDecode(texto);
       var id = reg['id'].toString().substring(0, 5);
 
-      hayNovedad = hayNovedad | await usuario.procesaLocalidad(id);
+      hayNovedad = hayNovedad || await usuario.procesaLocalidad(id);
     });
 
     return hayNovedad;
@@ -42,6 +42,7 @@ class Salidas {
     var hayCambios = false;
     if (await estaRegistrada(elemento) == false) {
       // Procesar salida
+      print ('Procesando salida ${elemento}');
       hayCambios = await procesa(usuario, elemento);
     }
 
@@ -53,8 +54,7 @@ class Salidas {
     var hayCambios = false;
     var hayNuevoCambio = false;
 
-    await Future.forEach(listaSalidas, (elemento) async {
-      print('Procesando ${elemento}');
+    await Future.forEach(listaSalidas, (elemento) async {     
       hayNuevoCambio = await procesaSalida(usuario, elemento);
       hayCambios = hayCambios || hayNuevoCambio;
     });

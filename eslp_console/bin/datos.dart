@@ -54,11 +54,15 @@ class BaseDeDatos {
   }  
 
   Future<Registro> getRegistro(String clave, String valor) async {
+    //print ('TABLA: ${_tabla} - CLAVE: ${clave} - VALOR: ${valor}');
     var store = intMapStoreFactory.store();
     var finder = Finder(
       filter: Filter.equals(clave, valor),
       sortOrders: [SortOrder(clave)]);
     var registro = await store.findFirst(_db, finder: finder);    
+    if (await store.count(_db) == 0) {
+      return null;
+    }
     var datosRegistro = await store.record(registro.key).getSnapshot(_db); 
     var claveRegistro = registro.key;
     return Registro(datosRegistro, claveRegistro); 
@@ -78,5 +82,20 @@ class BaseDeDatos {
   Future<Map> updateRegistro(int clave, String campo, var valor) async {
     var store = intMapStoreFactory.store();
     return await store.record(clave).update(_db, {campo: valor});
+  }
+
+  Future<int> numRegistros () async  {
+    var store = intMapStoreFactory.store();
+     final records = await store.find(_db);
+     return records.length;
+  }
+
+  Future<void> erase_db () async {
+    _dbFactory = databaseFactoryIo;
+
+    // open the database. We use the database factory to open the database
+    _db = await _dbFactory.openDatabase(_tabla);
+    var store = intMapStoreFactory.store();
+    await store.delete(_db);
   }
 }
