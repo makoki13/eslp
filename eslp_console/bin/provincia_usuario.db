@@ -1,5 +1,8 @@
 {"version":1,"sembast":1}
-{"key":4,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":0}}
-{"key":4,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":1}}
-{"key":4,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":2}}
-{"key":4,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":3}}
+{"key":5,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":2}}
+{"key":5,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":3}}
+{"key":5,"deleted":true,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":3}}
+{"key":6,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":0}}
+{"key":6,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":1}}
+{"key":6,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":2}}
+{"key":6,"value":{"usuario":"pablo.makoki@gmail.com","provincia":"46","localidades":3}}
