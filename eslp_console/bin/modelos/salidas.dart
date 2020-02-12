@@ -17,14 +17,10 @@ class Salidas {
   }
 
 /* Devuelve true si ha habido algún cambio en la lista de hitos */
-  Future<bool> procesa(Usuario usuario, String salida) async {
-    //Guarda en la tabla de salidas por usuario
-    var tupla = {'salida': '${salida}'};
-    await _bd_Salidas.addRegistro(tupla);
-
+  Future<bool> procesa(Usuario usuario, String salida) async {    
     var listaPuntos = <Coordenadas>[];
 
-    listaPuntos = RideWithGPS.getPuntosDeSalida(salida);
+    listaPuntos = await RideWithGPS.getPuntosDeSalida(salida);
     var hayNovedad = false;
     await Future.forEach(listaPuntos, (elemento) async {
       var texto =
@@ -34,6 +30,10 @@ class Salidas {
 
       hayNovedad = hayNovedad || await usuario.procesaLocalidad(id);
     });
+
+    //Guarda en la tabla de salidas por usuario
+    var tupla = {'salida': '${salida}'};
+    await _bd_Salidas.addRegistro(tupla);
 
     return hayNovedad;
   }
@@ -60,5 +60,9 @@ class Salidas {
     });
 
     return hayCambios;
+  }
+
+  Future<int> numSalidasRegistradas () async {
+    return await _bd_Salidas.numRegistros();
   }
 }

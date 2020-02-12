@@ -2,9 +2,12 @@ import '../datos.dart';
 import 'comunidad_autonoma.dart';
 import 'localidad.dart';
 import 'provincia.dart';
+import 'rwgps.dart';
 
 class Usuario {
   String _usuario;
+  int _puntuacion;
+  int _numSalidasProcesadas;
 
   final _bd_Usuarios = BaseDeDatos('usuarios.db');
   final _bd_LocalidadesUsuario = BaseDeDatos('localidad_usuario.db');
@@ -18,12 +21,24 @@ class Usuario {
   }
 
   Future<void> inicia() async {
+    var datos;
+
     await _bd_Usuarios.abre();
     await _bd_LocalidadesUsuario.abre();
     await _bd_ProvinciasUsuario.abre();
     await _bd_CCAAUsuario.abre();
-
     await localidad.inicia();
+
+    var registro = await _bd_Usuarios.getRegistro('nombre', _usuario);
+    if (registro == null) {
+      var tupla = {'id': '00', 'nombre': '${_usuario}' , 'puntos' : 0, 'salidas': 0, 'completado' : 0};
+      await _bd_Usuarios.addRegistro(tupla);      
+      datos = tupla;
+    }  
+    else {
+      datos = registro.getTupla();
+    }
+    _puntuacion = datos['puntos'];
   }
 
   String _getUsuarioActual() {
@@ -34,12 +49,30 @@ class Usuario {
     return _usuario;
   }
 
-  Future<int> getPuntuacionActual() async {    
+  Future<int> getNumSalidasTotales () async {
+    return await RideWithGPS.getNumSalidas();
+  }
+
+  int getNumSalidasProcesadas () { return _numSalidasProcesadas; }
+
+/*
+  Future<int> getDataUsuario() async {    
     var registro = await _bd_Usuarios.getRegistro('nombre', _usuario);
     var datos = registro.getTupla();
 
     return datos['puntos'];
   }
+*/  
+
+  Future<int> getPuntuacionActual() async { return _puntuacion; }   
+    /*
+    var registro = await _bd_Usuarios.getRegistro('nombre', _usuario);
+    var datos = registro.getTupla();
+
+    return datos['puntos'];
+    
+  }
+  */
 
   Future<int> getPuntuacion() async {    
     return await getPuntuacionActual();
@@ -54,7 +87,7 @@ class Usuario {
     var datos;
     var registro = await _bd_Usuarios.getRegistro('nombre', _usuario);
     if (registro == null) {
-      var tupla = {'id': '00', 'nombre': '${_usuario}' , 'puntos' : 0, 'completado' : 0};
+      var tupla = {'id': '00', 'nombre': '${_usuario}' , 'puntos' : 0, 'salidas': 0, 'completado' : 0};
       clave = await _bd_Usuarios.addRegistro(tupla);      
       datos = tupla;
     }  
