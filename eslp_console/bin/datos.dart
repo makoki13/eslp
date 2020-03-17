@@ -59,10 +59,14 @@ class BaseDeDatos {
     var finder = Finder(
       filter: Filter.equals(clave, valor),
       sortOrders: [SortOrder(clave)]);
-    var registro = await store.findFirst(_db, finder: finder);    
-    if (await store.count(_db) == 0) {
+    var registro = await store.findFirst(_db, finder: finder);        
+    if (registro == null) {
+      //print ('${valor} es nulo');
       return null;
     }
+
+    //print ('Num tuplas: ${numTuplas} registro: ${registro}');
+
     var datosRegistro = await store.record(registro.key).getSnapshot(_db); 
     var claveRegistro = registro.key;
     return Registro(datosRegistro, claveRegistro); 
@@ -86,8 +90,8 @@ class BaseDeDatos {
 
   Future<int> numRegistros () async  {
     var store = intMapStoreFactory.store();
-     final records = await store.find(_db);
-     return records.length;
+    final records = await store.find(_db);
+    return records.length;
   }
 
   Future<void> erase_db () async {
@@ -97,5 +101,10 @@ class BaseDeDatos {
     _db = await _dbFactory.openDatabase(_tabla);
     var store = intMapStoreFactory.store();
     await store.delete(_db);
+  }
+
+  Future<List<RecordSnapshot>> devuelveTabla() async {
+    var store = intMapStoreFactory.store();
+    return await store.find(_db);
   }
 }

@@ -4,3 +4,10 @@ http://www.cartociudad.es/geocoder/api/geocoder/reverseGeocode?lon=-0.141949&lat
 
 rwgps
 id usuario: 1336335
+api key: 824e0ab1
+
+//var parametros =  {'auth_token': '54e40ca820e6e6434b2249c8b527e3b3', 'apikey': '824e0ab1', 'version': '2'};    
+
+cartociudad@ign.es
+
+//Código de Municipio según codificación del INE.

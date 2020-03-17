@@ -99,6 +99,10 @@ class Usuario {
     var nuevaPuntuacion = datos['puntos'] + puntos;
     await _bd_Usuarios.updateRegistro(
         clave, 'puntos', nuevaPuntuacion);
+
+    //print ('nueva puntcaiocn ${nuevaPuntuacion}');
+    
+    _puntuacion = nuevaPuntuacion;
   }
 
   Future<Map> obtenemosInfoLocalidad(idLocalidad) async {     
@@ -136,7 +140,7 @@ class Usuario {
 
     await provincia.inicia(idProvincia);
     var municipiosTotales = await provincia.numeroMunicipios();
-    print ('MUNICIPIOS DE PROVINCIA: ${municipiosTotales} ');
+    //print ('MUNICIPIOS DE PROVINCIA: ${municipiosTotales} ');
     if (municipiosTotales <= nuevaPuntuacion ) { //Se ha completado una provincia!
       haHabidoCompletitud = true;
       actualizamosPuntuacion(100);
@@ -169,7 +173,7 @@ class Usuario {
 
     await comunidadAutonoma.inicia(idCA);
     var municipiosTotales = await comunidadAutonoma.numeroMunicipios();
-    print ('MUNICIPIOS DE C.A.: ${municipiosTotales} ');
+    //print ('MUNICIPIOS DE C.A.: ${municipiosTotales} ');
     if (municipiosTotales <= nuevaPuntuacion ) { //Se ha completado una comunidad autonoma!
       haHabidoCompletitud = true;
       actualizamosPuntuacion(1000);    
@@ -177,18 +181,19 @@ class Usuario {
 
     return haHabidoCompletitud;  
   }
-
-  //Si el número de c.a. visitadas es igual al total del pais ponemos completado en la ficha del usuario y sumamos 10000 en la puntuacion
-
+  
+  ///
+  /// Esta función habrá que tratarla como una única transacción.
+  ///
   Future<bool> procesaLocalidad(String idLocalidad) async {        
     var existe = await existeLocalidad(_bd_LocalidadesUsuario, idLocalidad);    
     if (existe == false) {
       //insertamos en la tabla de localidad_usuario
-      var tupla = {'usuario': '${_usuario}', 'localidad': '${idLocalidad}'};
+      var tupla = {'usuario': '${_usuario}', 'localidad': '${idLocalidad}'};      
       var key = await _bd_LocalidadesUsuario.addRegistro( tupla );
       await actualizamosPuntuacion(1);
       var localidad = await obtenemosInfoLocalidad(idLocalidad);
-      print('Localidad: {$key . $localidad}');
+      //print('Localidad: {$key . $localidad}');
       var actualizamosLaProvincia = await actualizamosComarca(localidad['comarca']);
       if (actualizamosLaProvincia == true) {
         var actualizamosLaComunidadAutonoma = await actualizamosProvincia(localidad['provincia']);
@@ -196,6 +201,7 @@ class Usuario {
           var testeamosPais = await actualizamosComunidadAutonoma(localidad['ca']);
           if (testeamosPais == true) {
               var numCCAACompletadas = await _bd_CCAAUsuario.numRegistros();
+              //Si el número de c.a. visitadas es igual al total del pais ponemos completado en la ficha del usuario y sumamos 10000 en la puntuacion
               if (numCCAACompletadas == 19) {
                 await actualizamosPuntuacion(10000);
               }

@@ -7,28 +7,58 @@ import 'web_server.dart';
 
 class Salidas {
   final _bd_Salidas = BaseDeDatos('salidas.db');
+  final _bd_localidades = BaseDeDatos('localidades.db');
 
   Future<void> inicia() async {
     await _bd_Salidas.abre();
+    await _bd_localidades.abre();
   }
 
-  Future<bool> estaRegistrada(String salida) async {    
+  Future<bool> estaRegistrada(String salida) async {
     return _bd_Salidas.existeRegistro('salida', salida);
   }
 
 /* Devuelve true si ha habido algún cambio en la lista de hitos */
-  Future<bool> procesa(Usuario usuario, String salida) async {    
+  Future<bool> procesa(Usuario usuario, String salida) async {
     var listaPuntos = <Coordenadas>[];
 
     listaPuntos = await RideWithGPS.getPuntosDeSalida(salida);
     var hayNovedad = false;
+    var i = 1;
+    var numPuntos = listaPuntos.length;
     await Future.forEach(listaPuntos, (elemento) async {
+      print('procesando punto ${i} de ${numPuntos}');
       var texto =
           await WS.getPoblacion(elemento.getLatitud(), elemento.getLongitud());
-      dynamic reg = jsonDecode(texto);
-      var id = reg['id'].toString().substring(0, 5);
+      if (texto.isNotEmpty) {
+        dynamic reg = jsonDecode(texto);
+        var id = '';
+        if (reg['id'].toString().length == 12) {
+          id = reg['id'].toString().substring(0, 5);
+        } else {
+          id = '0' + reg['id'].toString().substring(0, 4);
+        }
+        //print ('Previo ::: ${reg.toString().substring(0,200)}');
+        //print ('Previo ::: ${elemento.getLatitud()} , ${elemento.getLongitud()}');
+        var tipoPunto = reg['geom'].toString().substring(0, 4);
 
-      hayNovedad = hayNovedad || await usuario.procesaLocalidad(id);
+        if (tipoPunto == 'MULT') {
+          /*
+            var nombre = reg['muni'].toString();
+            var registroPorNombre = await _bd_localidades.getRegistro('nombre', nombre.toString().toUpperCase());
+            print ('Registro ::: ${registroPorNombre.getTupla()}');
+            id = registroPorNombre.getTupla()['id'];
+            hayNovedad = hayNovedad || await usuario.procesaLocalidad(id);
+            */
+        }
+
+        if ((tipoPunto == 'POIN') || (tipoPunto == 'null')) {
+          //print ('Procesamos localidad ${id}');
+          hayNovedad = hayNovedad || await usuario.procesaLocalidad(id);
+        }
+      }
+
+      i++;
     });
 
     //Guarda en la tabla de salidas por usuario
@@ -42,7 +72,6 @@ class Salidas {
     var hayCambios = false;
     if (await estaRegistrada(elemento) == false) {
       // Procesar salida
-      print ('Procesando salida ${elemento}');
       hayCambios = await procesa(usuario, elemento);
     }
 
@@ -54,7 +83,11 @@ class Salidas {
     var hayCambios = false;
     var hayNuevoCambio = false;
 
-    await Future.forEach(listaSalidas, (elemento) async {     
+    var numElementos = listaSalidas.length;
+    var i = 0;
+    await Future.forEach(listaSalidas, (elemento) async {
+      i++;
+      print('Procesando elemento ${i} de ${numElementos} : ${elemento}');
       hayNuevoCambio = await procesaSalida(usuario, elemento);
       hayCambios = hayCambios || hayNuevoCambio;
     });
@@ -62,7 +95,7 @@ class Salidas {
     return hayCambios;
   }
 
-  Future<int> numSalidasRegistradas () async {
+  Future<int> numSalidasRegistradas() async {
     return await _bd_Salidas.numRegistros();
   }
 }
